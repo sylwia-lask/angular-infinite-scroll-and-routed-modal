@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="card$ | async as card; else loadingCardInfo">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm">
+                    <img class="card-image" [src]="card.imageUrl" [alt]="card.name" />
+                </div>
+                <div class="col-sm">
+                    <h6>Name:</h6>
+                    <p>{{ card.name }}</p>
+                    <h6>Super type:</h6>
+                    <p>{{ card.supertype }}</p>
+                    <h6>ID:</h6>
+                    <p>{{ card.id }}</p>
+                    <h6>Series:</h6>
+                    <p>{{ card.series }}</p>
+                    <h5>DETAILS:</h5>
+                    <p>{{ card.text }}</p>
+                    <div class="card-details">
+                        <p *ngIf="card.types">Card types: <span *ngFor="let type of card.types">{{ type }} </span></p>
+                        <p *ngIf="card.rarity">Card rarity: {{ card.rarity }}</p>
+                        <p *ngIf="card.nationalPokedexNumber">National Pokedex Number: {{ card.nationalPokedexNumber }}
+                        </p>
+                        <p *ngIf="card.hp">HP: {{ card.hp }}</p>
+                        <p *ngIf="card.set">Set: {{ card.set }}</p>
+                        <p *ngIf="card.weaknesses">Weaknesses <span *ngFor="let w of card.weaknesses">{{ w.type }}
+                                {{ w.value }}</span></p>
+                        <p *ngIf="card.attacks">Card attacks: <span *ngFor="let a of card.attacks">{{ a.name }} </span>
+                        </p>
+                        <p *ngIf="card.evolvesFrom">Evolves from: {{ card.evolvesFrom }}</p>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="card.relatedCards">
+                <h3>Related cards:</h3>
+                <div class="row">
+                    <div *ngFor="let related of (card$ | async)?.relatedCards" class="col-sm">
+                        <app-cards-list-item [card]="related"></app-cards-list-item>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+    <ng-template #loadingCardInfo>
+        <div class="spinner-container">
+            <div class="poke-spinner"></div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,7 @@
+<div *ngIf="card" class="card card-item">
+    <img class="card-img-top" [src]="card.imageUrl" [alt]="card.name">
+    <div class="card-body">
+        <h5 class="card-title">{{ card.name }}</h5>
+        <p class="card-text">{{ card.supertype }}</p>
+    </div>
+</div>

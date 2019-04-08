@@ -1,0 +1,16 @@
+.pokemons-list-container {
+    position: relative;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+
+.card-column {
+    display: flex; 
+    justify-content: center;
+    margin: 5px auto;
+    text-align: center;
+}
+
+.list-item {
+    cursor: pointer;
+}

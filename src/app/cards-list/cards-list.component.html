@@ -1,0 +1,10 @@
+<section class="container-fluid pokemons-list-container" infiniteScroll (scrolled)="onScroll()"
+    [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false">
+    <div class="row">
+        <div *ngFor="let card of cards$ | async" class="col-sm-4 col-lg-3 card-column">
+            <app-cards-list-item class="list-item" [card]="card" routerLink="{{ card.id }}/details" (click)="setSelectedCard(card)">
+            </app-cards-list-item>
+        </div>
+        <div *ngIf="loading" class="poke-spinner"></div>
+    </div>
+</section>
